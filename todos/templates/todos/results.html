@@ -1,0 +1,9 @@
+<h1>{{ list_task.list_task_text }}</h1>
+
+<ul>
+{% for list_item in list_task.list_item_set.all %}
+    <li>{{ list_item.list_item_text }} -- {{ list_item.completed }} completed{{ list_item.completed|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'todos:detail' list_task.id %}">Completed again?</a>

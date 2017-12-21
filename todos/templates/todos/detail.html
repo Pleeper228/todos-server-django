@@ -1,0 +1,14 @@
+<h1>{{ list_task.list_task_text }}</h1>
+<h1>{{ asss }}</h1>
+
+{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+
+<form action="{% url 'todos:completing' list_task.id %}" method="post">
+  {% csrf_token %}
+  {% for list_item in incompleted_items %}
+    <input type="checkbox" name="list_item-{{forloop.counter}}" id="list_item{{ forloop.counter }}" value="{{ list_item.id }}" />
+    <label for="list_item{{ forloop.counter }}">{{ list_item.list_item_text }}</label><br />
+  {% endfor %}
+  <input type="submit" value="Completed" />
+  <input type="hidden" name="incompleted_items_length" value="{{incompleted_items.count}}" />
+</form>
